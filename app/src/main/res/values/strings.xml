@@ -5,4 +5,19 @@
     <string name="Surname">Cognom</string>
     <string name="dni">DNI</string>
     <string name="checkin">Registra</string>
+    <string name="whosvisiting">A qui visita?</string>
+    <string-array name="List_CompanyVisited">
+        <item>SistelGroup</item>
+        <item>S.A. Sistel</item>
+        <item>DigiProces S.A.</item>
+        <item>6TL Engineering</item>
+        <item>SmartLift S.L.</item>
+    </string-array>
+
+    <string-array name="List_Visited">
+        <item>Gerard</item>
+        <item>Xavi</item>
+        <item>David</item>
+        <item>Roger</item>
+    </string-array>
 </resources>

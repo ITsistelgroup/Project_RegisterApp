@@ -11,39 +11,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="5">
+        android:weightSum="7">
 
-        <TextView
+        <Spinner
+            android:id="@+id/CompanyVisited"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+
+        <AutoCompleteTextView
+            android:id="@+id/Visited"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:hint="@string/whosvisiting"
+            android:inputType="text"/>
+
+        <EditText
             android:id="@+id/Company"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:textSize="30sp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="@string/Company" />
+            android:hint="@string/Company"
+            android:inputType="text"/>
 
-        <TextView
+        <EditText
             android:id="@+id/Name"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:textSize="30sp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="@string/Name" />
+            android:hint="@string/Name"
+            android:inputType="text"/>
 
-        <TextView
+        <EditText
             android:id="@+id/Surname"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:textSize="30sp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="@string/Surname" />
-        <TextView
+            android:hint="@string/Surname"
+            android:inputType="text"/>
+        <EditText
             android:id="@+id/DNI"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:textSize="30sp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="@string/dni" />
+            android:hint="@string/dni"
+            android:inputType="text"/>
 
         <Button
             android:id="@+id/btn_check"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:textSize="30sp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@string/checkin" />
     </LinearLayout>
