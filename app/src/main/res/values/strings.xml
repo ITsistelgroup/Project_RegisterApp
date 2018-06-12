@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Project_RegisterApp</string>
+    <string name="Company">Empresa</string>
+    <string name="Name">Nom</string>
+    <string name="Surname">Cognom</string>
+    <string name="dni">DNI</string>
+    <string name="checkin">Registra</string>
 </resources>
