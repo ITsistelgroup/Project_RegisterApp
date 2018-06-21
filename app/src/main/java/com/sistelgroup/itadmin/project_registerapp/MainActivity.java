@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_check;
     TextView CompanyVisited;
-    EditText Name, Motiu, Empresa;
+    EditText Name, Motiu, Empresa, DNI;
     AutoCompleteTextView Visited;
     private String company;
     private int IDcompany;
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         Name = findViewById(R.id.Name);
         Motiu = findViewById(R.id.Motiu);
         Empresa = findViewById(R.id.Company);
+        DNI = findViewById(R.id.DNI);
 
         //Captura els paràmetres
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void register() {
         //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
-        String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+Name.getText().toString()
+        String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+DNI.getText().toString()
                 +"&Empresa="+Empresa.getText().toString()
                 +"&Nom_Visitant="+Name.getText().toString()
                 +"&ID_EmpresaVisitada="+IDcompany
