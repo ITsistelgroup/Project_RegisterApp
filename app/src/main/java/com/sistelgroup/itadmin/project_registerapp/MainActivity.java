@@ -26,19 +26,56 @@ import java.net.URL;
 
 import static java.lang.Integer.parseInt;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     Button btn_check;
     TextView CompanyVisited;
-    EditText Name, Motiu;
+    EditText Name, Motiu, Empresa;
     AutoCompleteTextView Visited;
+    private String company;
+    private int IDcompany;
 
     //TODO: WS new user: "http://192.168.4.13:8090/phpfiles/newuser.php?MAC=aaaa&ID=bbb"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //setTheme(R.style.SixTLEngineeringTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent myIntent = getIntent(); // gets the previously created intent
+        company=myIntent.getStringExtra("CompanyVisited");
+        IDcompany= myIntent.getIntExtra("IDCompanyVisited",0);
+
+        /*switch (company){
+            case "S.A.Sistel":
+                //myIntent.putExtra("CompanyVisited","S.A.Sistel");
+                themeUtils.changeToTheme(this,"S.A.Sistel");
+                //this.setTheme(R.style.SASistelTheme);
+                //getApplication().setTheme(R.style.SASistelTheme);
+                break;
+            case "DigiProces S.A.":
+                //myIntent.putExtra("CompanyVisited","DigiProces S.A.");
+                themeUtils.changeToTheme(this,"DigiProces S.A.");
+                //this.setTheme(R.style.DigiProcesTheme);
+                //getApplication().setTheme(R.style.DigiProcesTheme);
+                break;
+            case "SmartLift S.L.":
+                //myIntent.putExtra("CompanyVisited","SmartLift S.L.");
+                themeUtils.changeToTheme(this,"SmartLift S.L.");
+                //this.setTheme(R.style.SmartLiftTheme);
+                //getApplication().setTheme(R.style.SmartLiftTheme);
+                break;
+            case "6TL Engineering":
+                //myIntent.putExtra("CompanyVisited","6TL Engineering");
+                themeUtils.changeToTheme(this,"6TL Engineering");
+                //this.setTheme(R.style.SixTLEngineeringTheme);
+                //getApplication().setTheme(R.style.SixTLEngineeringTheme);
+                break;
+            default:
+                break;
+        }*/
 
         Resources res = getResources();
 
@@ -47,10 +84,11 @@ public class MainActivity extends AppCompatActivity {
         btn_check = findViewById(R.id.btn_check);
         Name = findViewById(R.id.Name);
         Motiu = findViewById(R.id.Motiu);
+        Empresa = findViewById(R.id.Company);
 
         //Captura els paràmetres
-        Intent myIntent = getIntent(); // gets the previously created intent
-        CompanyVisited.setText(myIntent.getStringExtra("CompanyVisited"));
+
+        CompanyVisited.setText(company);
 
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,8 +107,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void register() {
-        Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
-        new CarregarDades().execute("http://192.168.4.13:8090/phpfiles/newuser.php?MAC="+Name.getText().toString()+"&ID="+Motiu.getText().toString());
+        //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
+        String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+Name.getText().toString()
+                +"&Empresa="+Empresa.getText().toString()
+                +"&Nom_Visitant="+Name.getText().toString()
+                +"&ID_EmpresaVisitada="+IDcompany
+                +"&ID_PersonaCitada="+Visited.getText().toString()
+                +"&Motiu="+Motiu.getText().toString();
+        AsyncTask<String, Void, String> retorn = new CarregarDades().execute(a);
+        Toast.makeText(this,retorn.toString(), Toast.LENGTH_LONG).show();
     }
 
     //Inici funcions WS

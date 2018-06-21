@@ -1,18 +1,23 @@
 package com.sistelgroup.itadmin.project_registerapp;
 
+import android.app.Application;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+
 public class CompanySelection extends AppCompatActivity {
 
     ImageView logoDigi, logoSmartLift, logoSASistel, logo6TL;
 
+    //public String companySelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //themeUtils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_company_selection);
 
         logo6TL=findViewById(R.id.logo_6TL);
@@ -53,6 +58,8 @@ public class CompanySelection extends AppCompatActivity {
         Intent myIntent = new Intent(this, MainActivity.class);
 
 
+        //TODO: setTheme a mitjes
+        myIntent.putExtra("IDCompanyVisited",i);
         switch (i){
             case 1:
                 myIntent.putExtra("CompanyVisited","S.A.Sistel");

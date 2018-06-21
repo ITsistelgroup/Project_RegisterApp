@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#01ADEF</color>
+    <color name="colorPrimary">#777777</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#0AD8F9</color>
+    <color name="colorAccent">#DDDDDD</color>
     <!--<color name="colorLight">#EEEEEE</color>-->
 
     <color name="colorPrimarySixTLEngineeringTheme">#941173</color>
