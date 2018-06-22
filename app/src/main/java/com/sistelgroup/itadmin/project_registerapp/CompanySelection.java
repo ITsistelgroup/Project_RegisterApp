@@ -1,5 +1,6 @@
 package com.sistelgroup.itadmin.project_registerapp;
 
+import android.app.ActionBar;
 import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -31,7 +32,18 @@ public class CompanySelection extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme2);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.sistelgroup);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setContentView(R.layout.activity_company_selection);
+
+        //android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+
+// set the icon
+        /*if (actionBar != null) {
+            actionBar.setIcon(R.mipmap.sistelgroup);
+        }*/
 
         /*Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -39,7 +51,6 @@ public class CompanySelection extends AppCompatActivity {
         /*getActionBar().setIcon(R.mipmap.sistelgroup);
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);*/
-
 
         logo6TL=findViewById(R.id.logo_6TL);
         logoDigi=findViewById(R.id.logo_Digi);
