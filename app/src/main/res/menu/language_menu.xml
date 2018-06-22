@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/Catala"
+        android:icon="@mipmap/ca"
+        android:title="Català"
+        app:showAsAction="always" />
+    <item android:id="@+id/Espanyol"
+        android:icon="@mipmap/es"
+        android:title="Español"
+        app:showAsAction="always" />
+    <item android:id="@+id/Angles"
+        android:icon="@mipmap/en"
+        android:title="English"
+        app:showAsAction="always" />
+    <item android:id="@+id/frances"
+        android:icon="@mipmap/fr"
+        android:title="Français"
+        app:showAsAction="always" />
+    <item android:id="@+id/alemany"
+        android:icon="@mipmap/de"
+        android:title="Deutsch"
+        app:showAsAction="always" />
+
+</menu>

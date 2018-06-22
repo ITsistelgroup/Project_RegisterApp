@@ -1,12 +1,20 @@
 package com.sistelgroup.itadmin.project_registerapp;
 
 import android.annotation.SuppressLint;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -16,6 +24,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +34,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
@@ -36,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView Visited;
     private String company;
     private int IDcompany;
+    JSONObject data;
 
     //TODO: WS new user: "http://192.168.4.13:8090/phpfiles/newuser.php?MAC=aaaa&ID=bbb"
 
@@ -108,15 +121,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void register() {
-        //Toast.makeText(this,"Success", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.Success, Toast.LENGTH_LONG).show();
         String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+DNI.getText().toString()
-                +"&Empresa="+Empresa.getText().toString()
+                +"&Emp_Vis="+Empresa.getText().toString()
                 +"&Nom_Visitant="+Name.getText().toString()
                 +"&ID_EmpresaVisitada="+IDcompany
                 +"&ID_PersonaCitada="+Visited.getText().toString()
                 +"&Motiu="+Motiu.getText().toString();
-        AsyncTask<String, Void, String> retorn = new CarregarDades().execute(a);
-        Toast.makeText(this,retorn.toString(), Toast.LENGTH_LONG).show();
+        new CarregarDades().execute(a);
+
+
+        startActivity(new Intent(this, CompanySelection.class));
     }
 
     //Inici funcions WS
@@ -163,9 +178,17 @@ public class MainActivity extends AppCompatActivity {
 
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
         Reader reader = new InputStreamReader(stream, "UTF-8");
+        StringBuffer json = new StringBuffer(2048);
+        try {
+            data = new JSONObject(json.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         char[] buffer = new char[len];
         reader.read(buffer);
         return new String(buffer);
     }
     //Final funcions WS
+
+
 }

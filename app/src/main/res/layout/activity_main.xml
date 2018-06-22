@@ -70,7 +70,7 @@
             android:textSize="30sp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:hint="Motiu"
+            android:hint="@string/motiu"
             android:inputType="text"/>
 
         <Button

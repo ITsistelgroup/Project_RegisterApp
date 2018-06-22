@@ -7,7 +7,7 @@
     <string name="checkin">Registra</string>
     <string name="whosvisiting">A qui visita?</string>
     <string name="motiu">Motiu</string>
-    <string name="Success">Success</string>
+    <string name="Success">Registre correcte</string>
     <string name="idioma_canviat">Idioma canviat correctament</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
@@ -16,8 +16,6 @@
         <item>6TL Engineering</item>
         <item>SmartLift S.L.</item>
     </string-array>
-
-
 
     <string-array name="List_Visited">
         <item>Gerard</item>

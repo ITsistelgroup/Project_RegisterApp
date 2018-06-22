@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">SistelGroup</string>
-    <string name="Company">Empresa</string>
+    <string name="Company">Entreprise</string>
     <string name="Name">Nom</string>
-    <string name="Surname">Cognom</string>
-    <string name="dni">DNI</string>
-    <string name="checkin">Registra</string>
-    <string name="whosvisiting">A qui visita?</string>
-    <string name="motiu">Motiu</string>
-    <string name="Success">Success</string>
-    <string name="idioma_canviat">Idioma canviat correctament</string>
+    <string name="Surname">Le nom</string>
+    <string name="dni">NIE</string>
+    <string name="checkin">Inscrire</string>
+    <string name="whosvisiting">Qui visitez-vous?</string>
+    <string name="motiu">Raison</string>
+    <string name="Success">Enregistrer correctement</string>
+    <string name="idioma_canviat">La langue a changé correctement</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>
