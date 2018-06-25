@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CompanySelection">
+    tools:context=".CompanySelection"
+    android:background="@color/colorPrimaryDark">
 
     <!--<android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,6 +22,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:weightSum="2"
         android:background="@color/colorPrimaryDark">

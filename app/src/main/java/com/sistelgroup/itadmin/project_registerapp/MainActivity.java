@@ -11,6 +11,8 @@ import android.os.AsyncTask;
 import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +38,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
 
+import static android.widget.Toast.LENGTH_LONG;
 import static java.lang.Integer.parseInt;
 
 
@@ -44,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_check;
     TextView CompanyVisited;
-    EditText Name, Motiu, Empresa, DNI;
+    EditText Name, Empresa, DNI;
     AutoCompleteTextView Visited;
     private String company;
     private int IDcompany;
     JSONObject data;
+    Spinner Motiu;
+    private String missatge;
 
     //TODO: WS new user: "http://192.168.4.13:8090/phpfiles/newuser.php?MAC=aaaa&ID=bbb"
 
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = getIntent(); // gets the previously created intent
         company=myIntent.getStringExtra("CompanyVisited");
         IDcompany= myIntent.getIntExtra("IDCompanyVisited",0);
+
 
         /*switch (company){
             case "S.A.Sistel":
@@ -100,9 +106,104 @@ public class MainActivity extends AppCompatActivity {
         Empresa = findViewById(R.id.Company);
         DNI = findViewById(R.id.DNI);
 
+        //tot en majúscules
+        Visited.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s=editable.toString();
+                if(!s.equals(s.toUpperCase()))
+                {
+                    s=s.toUpperCase();
+                    Visited.setText(s);
+                }
+                Visited.setSelection(Visited.getText().length());
+            }
+        });
+        Empresa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s=editable.toString();
+                if(!s.equals(s.toUpperCase()))
+                {
+                    s=s.toUpperCase();
+                    Empresa.setText(s);
+                }
+                Empresa.setSelection(Empresa.getText().length());
+            }
+        });
+        Name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s=editable.toString();
+                if(!s.equals(s.toUpperCase()))
+                {
+                    s=s.toUpperCase();
+                    Name.setText(s);
+                }
+                Name.setSelection(Name.getText().length());
+            }
+        });
+        DNI.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s=editable.toString();
+                if(!s.equals(s.toUpperCase()))
+                {
+                    s=s.toUpperCase();
+                    DNI.setText(s);
+                }
+                DNI.setSelection(DNI.getText().length());
+            }
+        });
+
         //Captura els paràmetres
 
         CompanyVisited.setText(company);
+
+        //Omplir Spinner Motiu
+        ArrayAdapter<CharSequence> adapterS = ArrayAdapter.createFromResource(this, R.array.Motius, android.R.layout.simple_spinner_item);
+        adapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Motiu.setAdapter(adapterS);
 
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,14 +222,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void register() {
-        Toast.makeText(this, R.string.Success, Toast.LENGTH_LONG).show();
+
         String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+DNI.getText().toString()
                 +"&Emp_Vis="+Empresa.getText().toString()
                 +"&Nom_Visitant="+Name.getText().toString()
                 +"&ID_EmpresaVisitada="+IDcompany
                 +"&ID_PersonaCitada="+Visited.getText().toString()
-                +"&Motiu="+Motiu.getText().toString();
+                +"&Motiu="+Motiu.getSelectedItem().toString();
+        //new CarregarDades().execute(a);
         new CarregarDades().execute(a);
+
+        //Toast.makeText(this, missatge, LENGTH_LONG).show();
+        //Toast.makeText(this,ret.toString(), Toast.LENGTH_LONG).show();
 
 
         startActivity(new Intent(this, CompanySelection.class));
@@ -139,11 +244,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
+                missatge = getResources().getString(R.string.Success);
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
-                return "URL incorrecta";
+                missatge = getResources().getString(R.string.URLerror);
+                return getString(R.string.URLerror);
             }
+
+
         }
+
+
 
         private String downloadUrl(String myurl) throws IOException {
             myurl = myurl.replace(" ", "%20");
@@ -165,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Convertir el InputString a String
                 String ContentAsString = readIt(stream, len);
+
                 return ContentAsString;
 
             } finally {

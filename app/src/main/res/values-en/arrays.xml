@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Motius">
+        <item>VISITA COMERCIAL</item>
+        <item>MANTENIMENT</item>
+        <item>NO CONFORMITAT</item>
+        <item>AUDITORIA</item>
+    </string-array>
+</resources>

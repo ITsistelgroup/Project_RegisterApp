@@ -9,6 +9,7 @@
     <string name="motiu">Grund</string>
     <string name="Success">korrekte Aufzeichnung</string>
     <string name="idioma_canviat">Sprache wurde korrekt geändert</string>
+    <string name="URLerror">URL incorrecta</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

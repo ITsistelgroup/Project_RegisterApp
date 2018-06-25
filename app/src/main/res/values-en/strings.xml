@@ -9,6 +9,7 @@
     <string name="motiu">Visit Reason</string>
     <string name="Success">Successful register</string>
     <string name="idioma_canviat">Language changed correctly</string>
+    <string name="URLerror">URL incorrecta</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>
