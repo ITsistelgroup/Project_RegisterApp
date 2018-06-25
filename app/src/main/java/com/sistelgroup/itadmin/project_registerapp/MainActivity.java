@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner Motiu;
     private String missatge;
 
-    //TODO: WS new user: "http://192.168.4.13:8090/phpfiles/newuser.php?MAC=aaaa&ID=bbb"
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +199,12 @@ public class MainActivity extends AppCompatActivity {
         //Captura els paràmetres
 
         CompanyVisited.setText(company);
+        CompanyVisited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CompanySelection.class));
+            }
+        });
 
         //Omplir Spinner Motiu
         ArrayAdapter<CharSequence> adapterS = ArrayAdapter.createFromResource(this, R.array.Motius, android.R.layout.simple_spinner_item);
@@ -221,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
         CompanyVisited.setAdapter(adapter);*/
     }
 
+    //TODO: control error WS (si no hi ha internet o falla ha de retornar-ho)
     private void register() {
 
         String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+DNI.getText().toString()

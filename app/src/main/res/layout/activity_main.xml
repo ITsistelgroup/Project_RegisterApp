@@ -66,15 +66,40 @@
             android:inputType="textCapCharacters"
             android:textSize="30sp" />
 
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_style"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+         <Spinner
+            android:id="@+id/Motiu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            android:layout_weight="2"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/arrow_down_float"
+                android:layout_weight="1"/>
+        </LinearLayout> -->
+
+
         <Spinner
             android:id="@+id/Motiu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:textSize="30sp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:hint="@string/motiu"
-            android:inputType="text"/>
+            android:layout_weight="1"/>
+
 
         <!--<EditText
             android:id="@+id/Motiu"
@@ -90,11 +115,11 @@
             android:id="@+id/btn_check"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:textSize="30sp"
+            android:textSize="50sp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="?colorPrimary"
-            android:textColor="?colorPrimaryDark"
+            android:background="@drawable/load"
+            android:textColor="?colorAccent"
             android:text="@string/checkin" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
