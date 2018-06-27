@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -161,8 +162,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Captura els paràmetres
-
         //assigna imatge
         switch (company){
             case "S.A.Sistel":
@@ -221,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
                 +"&Motiu="+Motiu.getSelectedItem().toString();
         //new CarregarDades().execute(a);
         new CarregarDades().execute(a);
+        Toast.makeText(MainActivity.this, R.string.Success, Toast.LENGTH_LONG).show();
+
 
         //Toast.makeText(this, missatge, LENGTH_LONG).show();
         //Toast.makeText(this,ret.toString(), Toast.LENGTH_LONG).show();
