@@ -1,30 +1,24 @@
 package com.sistelgroup.itadmin.project_registerapp;
 
-import android.annotation.SuppressLint;
-import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.CalendarContract;
+import android.os.DropBoxManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,9 +30,9 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import static android.widget.Toast.LENGTH_LONG;
 import static java.lang.Integer.parseInt;
 
 
@@ -46,14 +40,19 @@ import static java.lang.Integer.parseInt;
 public class MainActivity extends AppCompatActivity {
 
     Button btn_check;
-    TextView CompanyVisited;
-    EditText Name, Empresa, DNI;
+    ImageView CompanyVisited;
+    EditText Name, LletraCIF, NumCIF, DNI;
     AutoCompleteTextView Visited;
     private String company;
     private int IDcompany;
     JSONObject data;
     Spinner Motiu;
     private String missatge;
+    String[] entrades;
+    ListView EntryList;
+    ArrayList<DropBoxManager.Entry> list;
+    ArrayAdapter<DropBoxManager.Entry> adapter;
+    TextView NameCompany;
 
 
 
@@ -103,8 +102,10 @@ public class MainActivity extends AppCompatActivity {
         btn_check = findViewById(R.id.btn_check);
         Name = findViewById(R.id.Name);
         Motiu = findViewById(R.id.Motiu);
-        Empresa = findViewById(R.id.Company);
+        LletraCIF = findViewById(R.id.LletraCIF);
+        NumCIF = findViewById(R.id.NumCIF);
         DNI = findViewById(R.id.DNI);
+        NameCompany = findViewById(R.id.NameCompany);
 
         //tot en majúscules
         Visited.addTextChangedListener(new TextWatcher() {
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 Visited.setSelection(Visited.getText().length());
             }
         });
-        Empresa.addTextChangedListener(new TextWatcher() {
+        LletraCIF.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -146,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
                 if(!s.equals(s.toUpperCase()))
                 {
                     s=s.toUpperCase();
-                    Empresa.setText(s);
+                    LletraCIF.setText(s);
                 }
-                Empresa.setSelection(Empresa.getText().length());
+                LletraCIF.setSelection(LletraCIF.getText().length());
             }
         });
         Name.addTextChangedListener(new TextWatcher() {
@@ -196,9 +197,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        NumCIF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus && !LletraCIF.getText().toString().matches("") && !NumCIF.getText().toString().matches("")){
+                    new ConsultarDades().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="+LletraCIF.getText().toString()+NumCIF.getText().toString());
+                }
+            }
+        });
+
         //Captura els paràmetres
 
-        CompanyVisited.setText(company);
+        //assigna imatge
+        switch (company){
+            case "S.A.Sistel":
+                CompanyVisited.setImageResource(R.mipmap.sasistel);
+                break;
+            case "DigiProces S.A.":
+                CompanyVisited.setImageResource(R.mipmap.digi);
+                break;
+            case "SmartLift S.L.":
+                CompanyVisited.setImageResource(R.mipmap.smartlift);
+                break;
+            case "6TL Engineering":
+                CompanyVisited.setImageResource(R.mipmap.sixtl);
+                break;
+            default:
+
+        }
         CompanyVisited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,11 +253,12 @@ public class MainActivity extends AppCompatActivity {
         CompanyVisited.setAdapter(adapter);*/
     }
 
+
     //TODO: control error WS (si no hi ha internet o falla ha de retornar-ho)
     private void register() {
 
         String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+DNI.getText().toString()
-                +"&Emp_Vis="+Empresa.getText().toString()
+                +"&Emp_Vis="+ LletraCIF.getText().toString()+NumCIF.getText().toString()
                 +"&Nom_Visitant="+Name.getText().toString()
                 +"&ID_EmpresaVisitada="+IDcompany
                 +"&ID_PersonaCitada="+Visited.getText().toString()
@@ -247,6 +274,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Inici funcions WS
+    private class ConsultarDades extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                return downloadUrl(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "URL incorrecta";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if(result.indexOf("}")>0) {
+                entrades=result.split("\\}");
+                entrades = Arrays.copyOfRange(entrades, 0, entrades.length - 1);
+                Log.i("nvertstr", "[" + result + "]");
+
+
+                NameCompany.setText(entrades[0].substring(entrades[0].indexOf(":") + 2, entrades[0].length() - 1));
+                NameCompany.setEnabled(false);
+            } else {
+                NameCompany.setText("");
+                NameCompany.setEnabled(true);
+            }
+            /*
+            for(int i=0; i<entrades.length;i++){
+                list.add(new DropBoxManager.Entry(IDpersona, entrades[i]));
+                //liststrings.add((new Entry(IDpersona, entrades[i])).getIDJob());
+                Log.i("Element:", entrades[i]);
+            }
+
+            adapter = new EntryAdapter(HoursList.this,list);
+            Log.i("Adapter", "adapter creat");
+            EntryList.setAdapter(adapter);
+            Log.i("Adapter", "adapter assignat");
+            */
+
+        }
+    }
+
+
     public class CarregarDades extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -257,57 +327,59 @@ public class MainActivity extends AppCompatActivity {
                 missatge = getResources().getString(R.string.URLerror);
                 return getString(R.string.URLerror);
             }
-
-
         }
+    }
 
+    private String downloadUrl(String myurl) throws IOException {
+        myurl = myurl.replace(" ", "%20");
+        InputStream stream = null;
+        int len = 1000;
+        try {
+            URL url = new URL(myurl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(3000);
+            connection.setConnectTimeout(3000);
+            connection.setRequestMethod("GET");
+            connection.setDoInput(true);
+            // Open communications link (network traffic occurs here).
+            connection.connect();
+            int responseCode = connection.getResponseCode();
+            Log.d("reposta", "La resposta es: " + responseCode);
+            // Retrieve the response body as an InputStream.
+            stream = connection.getInputStream();
 
+            //Convertir el InputString a String
+            String ContentAsString = readIt(stream, len);
 
-        private String downloadUrl(String myurl) throws IOException {
-            myurl = myurl.replace(" ", "%20");
-            InputStream stream = null;
-            int len = 500;
-            try {
-                URL url = new URL(myurl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setReadTimeout(3000);
-                connection.setConnectTimeout(3000);
-                connection.setRequestMethod("GET");
-                connection.setDoInput(true);
-                // Open communications link (network traffic occurs here).
-                connection.connect();
-                int responseCode = connection.getResponseCode();
-                Log.d("reposta", "La resposta es: " + responseCode);
-                // Retrieve the response body as an InputStream.
-                stream = connection.getInputStream();
+            return ContentAsString;
 
-                //Convertir el InputString a String
-                String ContentAsString = readIt(stream, len);
-
-                return ContentAsString;
-
-            } finally {
-                // Close Stream and disconnect HTTPS connection.
-                if (stream != null) {
-                    stream.close();
-                }
+        } finally {
+            // Close Stream and disconnect HTTPS connection.
+            if (stream != null) {
+                stream.close();
             }
         }
     }
 
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
         Reader reader = new InputStreamReader(stream, "UTF-8");
-        StringBuffer json = new StringBuffer(2048);
-        try {
-            data = new JSONObject(json.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         char[] buffer = new char[len];
         reader.read(buffer);
         return new String(buffer);
     }
     //Final funcions WS
+
+    //Controla "Back button"
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            startActivity(new Intent(MainActivity.this, CompanySelection.class));
+            return true;
+        }
+        return false;
+    }
 
 
 }

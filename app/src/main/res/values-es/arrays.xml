@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="Motius">
-        <item>VISITA COMERCIAL</item>
-        <item>MANTENIMENT</item>
-        <item>NO CONFORMITAT</item>
-        <item>AUDITORIA</item>
+        <item>PRIMERA VISITA</item>
+        <item>VISITA SEGUIMIENTO</item>
+        <item>AUDITORÍA</item>
+        <item>PROCESO DE SELECCIÓN</item>
+        <item>TRABAJOS EXTERNOS</item>
     </string-array>
 </resources>

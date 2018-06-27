@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -175,4 +176,16 @@ public class CompanySelection extends AppCompatActivity {
     }
 
     //Final del Menu
+
+    //Controla "Back button"
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            finish();
+            System.exit(0);
+        }
+        return false;
+    }
 }
