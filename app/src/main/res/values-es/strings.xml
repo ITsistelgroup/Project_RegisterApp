@@ -10,7 +10,7 @@
     <string name="Success">Registro correcto</string>
     <string name="idioma_canviat">Idioma cambiado correctamente</string>
     <string name="URLerror">URL incorrecta</string>
-    <string name="NameCompany">Nom Empresa</string>
+    <string name="NameCompany">Nombre empresa</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

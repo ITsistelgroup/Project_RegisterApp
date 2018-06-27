@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_check;
     ImageView CompanyVisited;
-    EditText Name, LletraCIF, NumCIF, DNI;
+    EditText Name/*, LletraCIF*/, NumCIF, DNI;
     AutoCompleteTextView Visited;
     private String company;
     private int IDcompany;
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         btn_check = findViewById(R.id.btn_check);
         Name = findViewById(R.id.Name);
         Motiu = findViewById(R.id.Motiu);
-        LletraCIF = findViewById(R.id.LletraCIF);
+        //LletraCIF = findViewById(R.id.LletraCIF);
         NumCIF = findViewById(R.id.NumCIF);
         DNI = findViewById(R.id.DNI);
         NameCompany = findViewById(R.id.NameCompany);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 Visited.setSelection(Visited.getText().length());
             }
         });
-        LletraCIF.addTextChangedListener(new TextWatcher() {
+        /*LletraCIF.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 LletraCIF.setSelection(LletraCIF.getText().length());
             }
-        });
+        });*/
         Name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -200,8 +200,8 @@ public class MainActivity extends AppCompatActivity {
         NumCIF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus && !LletraCIF.getText().toString().matches("") && !NumCIF.getText().toString().matches("")){
-                    new ConsultarDades().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="+LletraCIF.getText().toString()+NumCIF.getText().toString());
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("")){
+                    new ConsultarDades().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
                 }
             }
         });
@@ -258,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
     private void register() {
 
         String a = "http://192.168.4.13:8090/phpfiles/sp_Registre.php?DNI="+DNI.getText().toString()
-                +"&Emp_Vis="+ LletraCIF.getText().toString()+NumCIF.getText().toString()
+                +"&Emp_Vis="/*+ LletraCIF.getText().toString()*/+NumCIF.getText().toString()
+                +"&NOM_Emp_Vis="+NameCompany.getText().toString()
                 +"&Nom_Visitant="+Name.getText().toString()
                 +"&ID_EmpresaVisitada="+IDcompany
                 +"&ID_PersonaCitada="+Visited.getText().toString()

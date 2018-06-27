@@ -13,7 +13,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="8">
 
         <ImageView
             android:id="@+id/CompanyVisited"
@@ -39,7 +39,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="13.5">
+            android:weightSum="12">
 
             <TextView
                 android:id="@+id/TitleCIF"
@@ -50,30 +50,7 @@
                 android:gravity="center_vertical"
                 android:textStyle="bold"
                 android:text="CIF:"
-                android:layout_weight="3.5"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/LletraCIF"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/border"
-                android:layout_weight="1.5"
-                android:inputType="textCapCharacters"
-                android:maxLength="1"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/Guio"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:gravity="center_vertical"
-                android:text="-"
-                android:layout_weight="0.5"
-                android:textStyle="bold"
+                android:layout_weight="4"
                 android:textSize="30sp" />
 
             <EditText
@@ -83,8 +60,8 @@
                 android:layout_gravity="center"
                 android:background="@drawable/border"
                 android:layout_weight="8"
-                android:inputType="number"
-                android:maxLength="8"
+                android:inputType="textCapCharacters"
+                android:maxLength="13"
                 android:textSize="30sp" />
         </LinearLayout>
 
