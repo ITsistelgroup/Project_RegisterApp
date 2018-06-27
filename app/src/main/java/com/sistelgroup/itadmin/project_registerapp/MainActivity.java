@@ -20,7 +20,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -32,6 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private String missatge;
     String[] entrades;
     ListView EntryList;
-    ArrayList<DropBoxManager.Entry> list;
-    ArrayAdapter<DropBoxManager.Entry> adapter;
+
+
     TextView NameCompany;
 
 
@@ -65,35 +65,9 @@ public class MainActivity extends AppCompatActivity {
         company=myIntent.getStringExtra("CompanyVisited");
         IDcompany= myIntent.getIntExtra("IDCompanyVisited",0);
 
+        new ConsultarEmpleatsaVisitar().execute("http://192.168.4.13:8090/phpfiles/llistaPersonesaVisitar.php");
 
-        /*switch (company){
-            case "S.A.Sistel":
-                //myIntent.putExtra("CompanyVisited","S.A.Sistel");
-                themeUtils.changeToTheme(this,"S.A.Sistel");
-                //this.setTheme(R.style.SASistelTheme);
-                //getApplication().setTheme(R.style.SASistelTheme);
-                break;
-            case "DigiProces S.A.":
-                //myIntent.putExtra("CompanyVisited","DigiProces S.A.");
-                themeUtils.changeToTheme(this,"DigiProces S.A.");
-                //this.setTheme(R.style.DigiProcesTheme);
-                //getApplication().setTheme(R.style.DigiProcesTheme);
-                break;
-            case "SmartLift S.L.":
-                //myIntent.putExtra("CompanyVisited","SmartLift S.L.");
-                themeUtils.changeToTheme(this,"SmartLift S.L.");
-                //this.setTheme(R.style.SmartLiftTheme);
-                //getApplication().setTheme(R.style.SmartLiftTheme);
-                break;
-            case "6TL Engineering":
-                //myIntent.putExtra("CompanyVisited","6TL Engineering");
-                themeUtils.changeToTheme(this,"6TL Engineering");
-                //this.setTheme(R.style.SixTLEngineeringTheme);
-                //getApplication().setTheme(R.style.SixTLEngineeringTheme);
-                break;
-            default:
-                break;
-        }*/
+
 
         Resources res = getResources();
 
@@ -106,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         NumCIF = findViewById(R.id.NumCIF);
         DNI = findViewById(R.id.DNI);
         NameCompany = findViewById(R.id.NameCompany);
+        NameCompany.setEnabled(false);
 
         //tot en majúscules
         Visited.addTextChangedListener(new TextWatcher() {
@@ -130,28 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 Visited.setSelection(Visited.getText().length());
             }
         });
-        /*LletraCIF.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String s=editable.toString();
-                if(!s.equals(s.toUpperCase()))
-                {
-                    s=s.toUpperCase();
-                    LletraCIF.setText(s);
-                }
-                LletraCIF.setSelection(LletraCIF.getText().length());
-            }
-        });*/
         Name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -196,12 +149,14 @@ public class MainActivity extends AppCompatActivity {
                 DNI.setSelection(DNI.getText().length());
             }
         });
-
         NumCIF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("")){
-                    new ConsultarDades().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
+                    new ConsultarEmpresa().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
+                }
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && NumCIF.getText().toString().matches("")){
+                    NameCompany.setEnabled(false);
                 }
             }
         });
@@ -244,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Llista persones a visitar
+        //Omplir llista persones a visitar
         ArrayAdapter<String> adapterV = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, res.getStringArray(R.array.List_Visited));
         Visited.setAdapter(adapterV);
 
@@ -275,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Inici funcions WS
-    private class ConsultarDades extends AsyncTask<String, Void, String> {
+    private class ConsultarEmpresa extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
             try {
@@ -317,6 +272,50 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private class ConsultarEmpleatsaVisitar extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                return downloadUrl(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "URL incorrecta";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if (result.indexOf("}") > 0) {
+                List<String> list=new ArrayList<String>();
+                entrades = result.split("\\}");
+                entrades = Arrays.copyOfRange(entrades, 0, entrades.length - 1);
+                Log.i("nvertstr", "[" + result + "]");
+
+
+                for (int i = 0; i < entrades.length; i++) {
+
+                    list.add(entrades[i].substring(entrades[i].indexOf(":") + 2, entrades[i].length() - 1));
+                    //liststrings.add((new Entry(IDpersona, entrades[i])).getIDJob());
+                    Log.i("Element:", entrades[i]);
+                }
+
+            /*adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list);
+            Log.i("Adapter", "adapter creat");
+            Visited.setAdapter(adapter);
+            Log.i("Adapter", "adapter assignat");*/
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        MainActivity.this,
+                        android.R.layout.simple_list_item_1,
+                        list );
+                Visited.setAdapter(arrayAdapter);
+
+
+
+            }
+        }
+
+    }
 
     public class CarregarDades extends AsyncTask<String, Void, String> {
         @Override
