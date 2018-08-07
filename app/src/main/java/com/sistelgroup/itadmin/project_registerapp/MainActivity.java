@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         //assigna imatge
         switch (company){
             case "S.A.Sistel":
@@ -191,10 +193,26 @@ public class MainActivity extends AppCompatActivity {
         adapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Motiu.setAdapter(adapterS);
 
-        btn_check.setOnClickListener(new View.OnClickListener() {
+        /*btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 register();
+            }
+        });*/
+
+        btn_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, CaptureSignature.class);
+                i.putExtra("CIF", NumCIF.getText().toString());
+                i.putExtra("NomEmpresa", NameCompany.getText().toString());
+                i.putExtra("NomPersona", Name.getText().toString());
+                i.putExtra("QuiVisita", Visited.getText().toString());
+                i.putExtra("Motiu", Motiu.getSelectedItem().toString());
+                i.putExtra("DNI", DNI.getText().toString());
+                i.putExtra("company", company);
+                i.putExtra("IDcompany", IDcompany);
+                startActivity(i);
             }
         });
 
@@ -334,12 +352,12 @@ public class MainActivity extends AppCompatActivity {
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
         InputStream stream = null;
-        int len = 1000;
+        int len = 10000;
         try {
             URL url = new URL(myurl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setReadTimeout(3000);
-            connection.setConnectTimeout(3000);
+            connection.setReadTimeout(4000);
+            connection.setConnectTimeout(4000);
             connection.setRequestMethod("GET");
             connection.setDoInput(true);
             // Open communications link (network traffic occurs here).

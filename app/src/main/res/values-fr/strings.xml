@@ -11,6 +11,8 @@
     <string name="idioma_canviat">La langue a changé correctement</string>
     <string name="URLerror">URL incorrecta</string>
     <string name="NameCompany">Nom de entreprise</string>
+    <string name="hello">Hola</string>
+    <string name="external_dir">GetSignature</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

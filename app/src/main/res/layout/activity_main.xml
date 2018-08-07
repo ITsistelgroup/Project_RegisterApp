@@ -54,7 +54,8 @@
                 android:background="@drawable/border"
                 android:inputType="textCapCharacters"
                 android:maxLength="20"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:nextFocusDown="@id/Name"/>
         </LinearLayout>
 
         <EditText
@@ -124,13 +125,15 @@
             android:layout_weight="1"
             android:hint="@string/whosvisiting"
             android:inputType="textCapCharacters"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:imeOptions="actionDone"/>
 
         <Spinner
             android:id="@+id/Motiu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:focusable="true"/>
 
 
         <!--<EditText

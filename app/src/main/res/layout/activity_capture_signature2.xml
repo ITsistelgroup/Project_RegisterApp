@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="13"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout android:layout_height="0dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:weightSum="3">
+
+        <Button android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:layout_width="0dp"
+            android:id="@+id/cancel" />
+
+        <Button android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Clear"
+            android:layout_width="0dp"
+            android:id="@+id/clear" />
+
+        <Button android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Save"
+            android:layout_width="0dp"
+            android:id="@+id/getsign" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:id="@+id/img_company"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/app_sistelgroup" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/CIF"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/NomEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/NomPersona"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/DNI"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/QuiVisita"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/Motiu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text=""
+        android:textSize="30sp" />
+</LinearLayout>
