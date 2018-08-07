@@ -13,6 +13,9 @@
     <string name="NameCompany">Firmenname</string>
     <string name="hello">Hola</string>
     <string name="external_dir">GetSignature</string>
+    <string name="cancel">abbrechen</string>
+    <string name="clear">klar</string>
+    <string name="sign">schild</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>
