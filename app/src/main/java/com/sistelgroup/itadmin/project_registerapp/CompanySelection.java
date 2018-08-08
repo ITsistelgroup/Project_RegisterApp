@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class CompanySelection extends AppCompatActivity {
 
-    ImageView logoDigi, logoSmartLift, logoSASistel, logo6TL;
+    ImageView logoDigi, logoSmartLift, logoSASistel, logo6TL, logoKfew;
 
     //public String companySelected;
 
@@ -57,6 +57,7 @@ public class CompanySelection extends AppCompatActivity {
         logoDigi=findViewById(R.id.logo_Digi);
         logoSASistel=findViewById(R.id.logo_sistel);
         logoSmartLift=findViewById(R.id.logo_SmartLift);
+        logoKfew=findViewById(R.id.logo_Kfew);
 
         logoSmartLift.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,13 @@ public class CompanySelection extends AppCompatActivity {
                 CompanySelected(7);
             }
         });
+
+        logoKfew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CompanySelected(6);
+            }
+        });
     }
 
     private void CompanySelected(int i) {
@@ -102,6 +110,9 @@ public class CompanySelection extends AppCompatActivity {
                 break;
             case 3:
                 myIntent.putExtra("CompanyVisited","SmartLift S.L.");
+                break;
+            case 6:
+                myIntent.putExtra("CompanyVisited","Kfew Systems S.L.");
                 break;
             case 7:
                 myIntent.putExtra("CompanyVisited","6TL Engineering");
@@ -183,8 +194,8 @@ public class CompanySelection extends AppCompatActivity {
     {
         if(keyCode == KeyEvent.KEYCODE_BACK)
         {
-            finish();
-            System.exit(0);
+            //finish();
+            //System.exit(0);
         }
         return false;
     }

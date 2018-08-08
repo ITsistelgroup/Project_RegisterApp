@@ -3,7 +3,7 @@
     android:id="@+id/linearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="13"
+    android:weightSum="14"
     android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout android:layout_height="0dp"
@@ -48,6 +48,31 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         app:srcCompat="@mipmap/app_sistelgroup" />
+
+    <LinearLayout
+        android:id="@+id/RGPD"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <CheckBox
+            android:id="@+id/acceptRGPD"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textRGPD"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="@string/RGPD"
+            android:textStyle="italic"
+            android:textColor="#5555FF"
+            android:textSize="25sp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/CIF"

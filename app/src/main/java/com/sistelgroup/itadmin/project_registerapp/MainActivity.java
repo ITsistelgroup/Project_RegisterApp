@@ -2,6 +2,7 @@ package com.sistelgroup.itadmin.project_registerapp;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.DropBoxManager;
 import android.support.v7.app.AppCompatActivity;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         NumCIF = findViewById(R.id.NumCIF);
         DNI = findViewById(R.id.DNI);
         NameCompany = findViewById(R.id.NameCompany);
-        NameCompany.setEnabled(false);
+        //NameCompany.setEnabled(false);
 
         //tot en majúscules
         Visited.addTextChangedListener(new TextWatcher() {
@@ -156,9 +157,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("")){
                     new ConsultarEmpresa().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
                 }
-                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && NumCIF.getText().toString().matches("")){
-                    NameCompany.setEnabled(false);
-                }
+                //TODO: descomentar les 3 següents línies i la 84 si es vol posar CIF obligatori
+                //if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && NumCIF.getText().toString().matches("")){
+                //    NameCompany.setEnabled(false);
+                //}
             }
         });
 
@@ -174,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "SmartLift S.L.":
                 CompanyVisited.setImageResource(R.mipmap.smartlift);
+                break;
+            case "Kfew Systems S.L.":
+                CompanyVisited.setImageResource(R.mipmap.kfew);
                 break;
             case "6TL Engineering":
                 CompanyVisited.setImageResource(R.mipmap.sixtl);
@@ -203,6 +208,28 @@ public class MainActivity extends AppCompatActivity {
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(NameCompany.getText().toString().matches("") || Name.getText().toString().matches("") || DNI.getText().toString().matches("")
+                        || Visited.getText().toString().matches("")){
+
+                    if(NameCompany.getText().toString().matches("")){
+                        NameCompany.setHintTextColor(Color.parseColor("#FF0000"));
+                        NameCompany.setHint(getString(R.string.NameCompany) + "*");
+                    }
+                    if(Name.getText().toString().matches("")){
+                        Name.setHintTextColor(Color.parseColor("#FF0000"));
+                        Name.setHint(getString(R.string.Name) + "*");
+                    }
+                    if(DNI.getText().toString().matches("")){
+                        DNI.setHintTextColor(Color.parseColor("#FF0000"));
+                        DNI.setHint(getString(R.string.dni) + "*");
+                    }
+                    if(Visited.getText().toString().matches("")){
+                        Visited.setHintTextColor(Color.parseColor("#FF0000"));
+                        Visited.setHint(getString(R.string.whosvisiting) + "*");
+                    }
+                    Toast.makeText(MainActivity.this, "Ompli tots els camps obligatoris abans de continuar", Toast.LENGTH_LONG).show();
+                }
+                else{
                 Intent i = new Intent(MainActivity.this, CaptureSignature.class);
                 i.putExtra("CIF", NumCIF.getText().toString());
                 i.putExtra("NomEmpresa", NameCompany.getText().toString());
@@ -213,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("company", company);
                 i.putExtra("IDcompany", IDcompany);
                 startActivity(i);
+                }
             }
         });
 

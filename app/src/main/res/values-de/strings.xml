@@ -16,6 +16,7 @@
     <string name="cancel">abbrechen</string>
     <string name="clear">klar</string>
     <string name="sign">schild</string>
+    <string name="RGPD">Accepto les polítiques de l\'empresa</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

@@ -51,7 +51,7 @@ public class CaptureSignature extends AppCompatActivity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
-    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI;
+    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, textRGPD;
     ImageView img_company;
     Intent myIntent;
 
@@ -81,6 +81,8 @@ public class CaptureSignature extends AppCompatActivity {
         Motiu=findViewById(R.id.Motiu);
         DNI=findViewById(R.id.DNI);
         img_company=findViewById(R.id.img_company);
+        textRGPD=findViewById(R.id.textRGPD);
+
 
         CIF.setText("CIF: " + myIntent.getStringExtra("CIF"));
         NomEmpresa.setText(getText(R.string.NameCompany) + ": " + myIntent.getStringExtra("NomEmpresa"));
@@ -100,6 +102,9 @@ public class CaptureSignature extends AppCompatActivity {
             case "SmartLift S.L.":
                 img_company.setImageResource(R.mipmap.smartlift);
                 break;
+            case "Kfew Systems S.L.":
+                img_company.setImageResource(R.mipmap.kfew);
+                break;
             case "6TL Engineering":
                 img_company.setImageResource(R.mipmap.sixtl);
                 break;
@@ -117,6 +122,13 @@ public class CaptureSignature extends AppCompatActivity {
         mGetSign.setEnabled(false);
         mCancel = (Button)findViewById(R.id.cancel);
         mView = mContent;
+
+        textRGPD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CaptureSignature.this, RGPD.class));
+            }
+        });
 
 
         mClear.setOnClickListener(new View.OnClickListener()

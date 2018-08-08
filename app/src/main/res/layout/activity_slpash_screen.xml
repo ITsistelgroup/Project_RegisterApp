@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SlpashScreen">
+    tools:context=".SlpashScreen"
+    android:background="@color/colorPrimaryDark">
 
     <!--
     <TextView
@@ -29,6 +30,6 @@
         android:padding="10dp"
         android:layout_marginBottom="15dp"
         android:gravity="center"
-        android:background="@drawable/load"
-        app:srcCompat="@mipmap/sistelgroup" />
+        android:background="@drawable/load2"
+        app:srcCompat="@mipmap/app_sistelgroup" />
 </android.support.constraint.ConstraintLayout>
