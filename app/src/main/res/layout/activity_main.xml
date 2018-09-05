@@ -10,8 +10,6 @@
         android:id="@+id/page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:weightSum="8">
 
@@ -55,7 +53,7 @@
                 android:inputType="textCapCharacters"
                 android:maxLength="20"
                 android:textSize="30sp"
-                android:nextFocusDown="@id/Name"/>
+                android:nextFocusDown="@id/NameCompany"/>
         </LinearLayout>
 
         <EditText

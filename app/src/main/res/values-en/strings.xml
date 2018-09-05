@@ -17,6 +17,11 @@
     <string name="clear">Clear</string>
     <string name="sign">Sign</string>
     <string name="RGPD">Accepto les polítiques de l\'empresa</string>
+    <string name="RGPDTitle">PACTO DE CONFIDENCIALIDAD Y LEALTAD</string>
+    <string name="RGPDMessage">text RGPD</string>
+    <string name="Accept">Aceptar</string>
+    <string name="Decline">Rechazar</string>
+    <string name="RGPDMessage1">a</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private String missatge;
     String[] entrades;
     ListView EntryList;
+    TextView TitleCIF;
 
 
     TextView NameCompany;
@@ -82,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
         NumCIF = findViewById(R.id.NumCIF);
         DNI = findViewById(R.id.DNI);
         NameCompany = findViewById(R.id.NameCompany);
-        //NameCompany.setEnabled(false);
+        NameCompany.setEnabled(false);
+        TitleCIF = findViewById(R.id.TitleCIF);
 
         //tot en majúscules
         Visited.addTextChangedListener(new TextWatcher() {
@@ -157,10 +159,10 @@ public class MainActivity extends AppCompatActivity {
                 if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("")){
                     new ConsultarEmpresa().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
                 }
-                //TODO: descomentar les 3 següents línies i la 84 si es vol posar CIF obligatori
-                //if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && NumCIF.getText().toString().matches("")){
-                //    NameCompany.setEnabled(false);
-                //}
+
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && NumCIF.getText().toString().matches("")){
+                    NameCompany.setEnabled(false);
+                }
             }
         });
 
@@ -208,9 +210,13 @@ public class MainActivity extends AppCompatActivity {
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(NameCompany.getText().toString().matches("") || Name.getText().toString().matches("") || DNI.getText().toString().matches("")
+                if(NumCIF.getText().toString().matches("") || NameCompany.getText().toString().matches("") || Name.getText().toString().matches("") || DNI.getText().toString().matches("")
                         || Visited.getText().toString().matches("")){
 
+                    if(NumCIF.getText().toString().matches("")){
+                        TitleCIF.setTextColor(Color.parseColor("#FF0000"));
+                        TitleCIF.setText("CIF:*");
+                    }
                     if(NameCompany.getText().toString().matches("")){
                         NameCompany.setHintTextColor(Color.parseColor("#FF0000"));
                         NameCompany.setHint(getString(R.string.NameCompany) + "*");

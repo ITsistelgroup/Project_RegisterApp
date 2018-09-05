@@ -2,6 +2,7 @@ package com.sistelgroup.itadmin.project_registerapp;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,14 +13,17 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,12 +55,14 @@ public class CaptureSignature extends AppCompatActivity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
-    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, textRGPD;
+    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI;
+    CheckBox acceptRGPD;
     ImageView img_company;
     Intent myIntent;
 
     private String uniqueId;
     private Bitmap mBitmapOut;
+    private boolean firmaplena=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +87,7 @@ public class CaptureSignature extends AppCompatActivity {
         Motiu=findViewById(R.id.Motiu);
         DNI=findViewById(R.id.DNI);
         img_company=findViewById(R.id.img_company);
-        textRGPD=findViewById(R.id.textRGPD);
+        acceptRGPD=findViewById(R.id.acceptRGPD);
 
 
         CIF.setText("CIF: " + myIntent.getStringExtra("CIF"));
@@ -123,10 +129,46 @@ public class CaptureSignature extends AppCompatActivity {
         mCancel = (Button)findViewById(R.id.cancel);
         mView = mContent;
 
-        textRGPD.setOnClickListener(new View.OnClickListener() {
+        acceptRGPD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CaptureSignature.this, RGPD.class));
+                if(acceptRGPD.isChecked()){
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CaptureSignature.this, R.style.ThemeOverlay_AppCompat_Dark);
+
+                    String text;
+                    if(myIntent.getStringExtra("company").equals("6TL Engineering")) {
+                        text = getResources().getString(R.string.RGPDMessage1) + " S.A.Sistel " + getResources().getString(R.string.RGPDMessage);
+                    } else {text = getResources().getString(R.string.RGPDMessage1) +" "+ myIntent.getStringExtra("company") +" "+ getResources().getString(R.string.RGPDMessage);}
+                    alertDialogBuilder.setTitle(R.string.RGPDTitle);
+                    alertDialogBuilder.setMessage(text);
+                    alertDialogBuilder.setPositiveButton(R.string.Accept,
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    acceptRGPD.setChecked(true);
+
+                                }
+                            });
+                    alertDialogBuilder.setNegativeButton(R.string.Decline,
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    acceptRGPD.setChecked(false);
+                                    mGetSign.setEnabled(false);
+                                }
+                            });
+
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                //startActivity(new Intent(CaptureSignature.this, RGPD.class));
+            }
+            if(acceptRGPD.isChecked() && firmaplena){
+                    mGetSign.setEnabled(true);
+            } else {mGetSign.setEnabled(false);}
             }
         });
 
@@ -138,6 +180,7 @@ public class CaptureSignature extends AppCompatActivity {
                 Log.v("log_tag", "Panel Cleared");
                 mSignature.clear();
                 mGetSign.setEnabled(false);
+                firmaplena=false;
             }
         });
 
@@ -327,21 +370,6 @@ public class CaptureSignature extends AppCompatActivity {
                 FileOutputStream fo = new FileOutputStream(f);
                 fo.write(byteArrayOutputStream.toByteArray());
 
-                /*FileOutputStream mFileOutStream = new FileOutputStream(mypath);
-
-
-
-
-                mBitmap.compress(Bitmap.CompressFormat.PNG, 90, mFileOutStream);
-                mFileOutStream.flush();
-                mFileOutStream.close();
-                String url = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap, "title", null);
-                Log.v("log_tag","url: " + url);*/
-                //In case you want to delete the file
-                //boolean deleted = mypath.delete();
-                //Log.v("log_tag","deleted: " + mypath.toString() + deleted);
-                //If you want to convert the image to string use base64 converter
-
             }
             catch(Exception e)
             {
@@ -400,7 +428,10 @@ public class CaptureSignature extends AppCompatActivity {
         {
             float eventX = event.getX();
             float eventY = event.getY();
-            mGetSign.setEnabled(true);
+            firmaplena=true;
+            if(acceptRGPD.isChecked()){
+                mGetSign.setEnabled(true);
+            }
 
             switch (event.getAction())
             {

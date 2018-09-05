@@ -12,22 +12,25 @@
         android:layout_weight="1"
         android:weightSum="3">
 
-        <Button android:layout_height="50dp"
+        <Button android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/cancel"
             android:layout_width="0dp"
+            android:textSize="25sp"
             android:id="@+id/cancel" />
 
-        <Button android:layout_height="50dp"
+        <Button android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/clear"
             android:layout_width="0dp"
+            android:textSize="25sp"
             android:id="@+id/clear" />
 
-        <Button android:layout_height="50dp"
+        <Button android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/sign"
             android:layout_width="0dp"
+            android:textSize="25sp"
             android:id="@+id/getsign" />
 
     </LinearLayout>
@@ -54,24 +57,26 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="6">
+        android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/acceptRGPD"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textRGPD"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
             android:text="@string/RGPD"
             android:textStyle="italic"
             android:textColor="#5555FF"
             android:textSize="25sp"/>
+
+        <!--<TextView
+            android:id="@+id/textRGPD"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/RGPD"
+            android:textStyle="italic"
+            android:textColor="#5555FF"
+            android:textSize="25sp"
+            android:layout_gravity="center_vertical"/>-->
     </LinearLayout>
 
     <TextView
