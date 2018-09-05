@@ -156,11 +156,11 @@ public class MainActivity extends AppCompatActivity {
         NumCIF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("")){
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("") && NumCIF.getText().toString().length()==9){
                     new ConsultarEmpresa().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
                 }
 
-                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && NumCIF.getText().toString().matches("")){
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && (NumCIF.getText().toString().matches("") || NumCIF.getText().toString().length()!=9)){
                     NameCompany.setEnabled(false);
                 }
             }
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                         Visited.setHintTextColor(Color.parseColor("#FF0000"));
                         Visited.setHint(getString(R.string.whosvisiting) + "*");
                     }
-                    Toast.makeText(MainActivity.this, "Ompli tots els camps obligatoris abans de continuar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.Rellenar, Toast.LENGTH_LONG).show();
                 }
                 else{
                 Intent i = new Intent(MainActivity.this, CaptureSignature.class);
