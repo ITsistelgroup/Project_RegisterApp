@@ -23,6 +23,7 @@
     <string name="Accept">Accept</string>
     <string name="Decline">Decline</string>
     <string name="Rellenar">I accept company policies</string>
+    <string name="moreinfo">Read more information about company policies</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

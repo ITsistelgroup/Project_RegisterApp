@@ -3,7 +3,9 @@
     android:id="@+id/linearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="14"
+    android:weightSum="15"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
     android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout android:layout_height="0dp"
@@ -52,23 +54,8 @@
         android:layout_weight="2"
         app:srcCompat="@mipmap/app_sistelgroup" />
 
-    <LinearLayout
-        android:id="@+id/RGPD"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/acceptRGPD"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/RGPD"
-            android:textStyle="italic"
-            android:textColor="#5555FF"
-            android:textSize="25sp"/>
-
-        <!--<TextView
+    <!--<TextView
             android:id="@+id/textRGPD"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -77,7 +64,7 @@
             android:textColor="#5555FF"
             android:textSize="25sp"
             android:layout_gravity="center_vertical"/>-->
-    </LinearLayout>
+
 
     <TextView
         android:id="@+id/CIF"
@@ -126,4 +113,26 @@
         android:layout_weight="1"
         android:text=""
         android:textSize="30sp" />
+
+    <CheckBox
+        android:id="@+id/acceptRGPD"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:text="@string/RGPD"
+        android:textSize="35sp"/>
+
+    <TextView
+        android:id="@+id/moreinfo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/moreinfo"
+        android:textColor="#3333DD"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:background="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:paddingTop="6dp"/>
 </LinearLayout>

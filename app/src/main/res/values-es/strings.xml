@@ -23,6 +23,7 @@
     <string name="Decline">Rechazar</string>
     <string name="RGPDMessage1">Pacto de confidencialidad entre</string>
     <string name="Rellenar">Rellene todos los campos obligatorios antes de continuar</string>
+    <string name="moreinfo">Leer más información sobre las políticas de empresa</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

@@ -23,6 +23,7 @@
     <string name="Decline">Rebutjar</string>
     <string name="RGPDMessage1">Pacte de confidencialitat entre</string>
     <string name="Rellenar">Ompli tots els camps obligatoris abans de continuar</string>
+    <string name="moreinfo">Llegir més sobre les polítiques d\'empresa</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

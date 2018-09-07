@@ -55,7 +55,7 @@ public class CaptureSignature extends AppCompatActivity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
-    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI;
+    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, moreinfo;
     CheckBox acceptRGPD;
     ImageView img_company;
     Intent myIntent;
@@ -88,6 +88,7 @@ public class CaptureSignature extends AppCompatActivity {
         DNI=findViewById(R.id.DNI);
         img_company=findViewById(R.id.img_company);
         acceptRGPD=findViewById(R.id.acceptRGPD);
+        moreinfo=findViewById(R.id.moreinfo);
 
 
         CIF.setText("CIF: " + myIntent.getStringExtra("CIF"));
@@ -132,43 +133,25 @@ public class CaptureSignature extends AppCompatActivity {
         acceptRGPD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(acceptRGPD.isChecked()){
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CaptureSignature.this, R.style.ThemeOverlay_AppCompat_Dark);
-
-                    String text;
-                    if(myIntent.getStringExtra("company").equals("6TL Engineering")) {
-                        text = getResources().getString(R.string.RGPDMessage1) + " S.A.Sistel " + getResources().getString(R.string.RGPDMessage);
-                    } else {text = getResources().getString(R.string.RGPDMessage1) +" "+ myIntent.getStringExtra("company") +" "+ getResources().getString(R.string.RGPDMessage);}
-                    alertDialogBuilder.setTitle(R.string.RGPDTitle);
-                    alertDialogBuilder.setMessage(text);
-                    alertDialogBuilder.setPositiveButton(R.string.Accept,
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    acceptRGPD.setChecked(true);
-
-                                }
-                            });
-                    alertDialogBuilder.setNegativeButton(R.string.Decline,
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    acceptRGPD.setChecked(false);
-                                    mGetSign.setEnabled(false);
-                                }
-                            });
-
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                /*if(acceptRGPD.isChecked()){
+                    info_RGPD();
 
                 //startActivity(new Intent(CaptureSignature.this, RGPD.class));
-            }
+            }*/
             if(acceptRGPD.isChecked() && firmaplena){
                     mGetSign.setEnabled(true);
             } else {mGetSign.setEnabled(false);}
+            }
+
+
+        });
+
+
+
+        moreinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                info_RGPD();
             }
         });
 
@@ -224,6 +207,39 @@ public class CaptureSignature extends AppCompatActivity {
     protected void onDestroy() {
         Log.w("GetSignature", "onDestory");
         super.onDestroy();
+    }
+
+    public void info_RGPD() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CaptureSignature.this, R.style.ThemeOverlay_AppCompat_Dark);
+
+        String text;
+        if(myIntent.getStringExtra("company").equals("6TL Engineering")) {
+            text = getResources().getString(R.string.RGPDMessage1) + " S.A.Sistel " + getResources().getString(R.string.RGPDMessage);
+        } else {text = getResources().getString(R.string.RGPDMessage1) +" "+ myIntent.getStringExtra("company") +" "+ getResources().getString(R.string.RGPDMessage);}
+        alertDialogBuilder.setTitle(R.string.RGPDTitle);
+        alertDialogBuilder.setMessage(text);
+        alertDialogBuilder.setPositiveButton(R.string.Accept,
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        acceptRGPD.setChecked(true);
+
+                    }
+                });
+        alertDialogBuilder.setNegativeButton(R.string.Decline,
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        acceptRGPD.setChecked(false);
+                        mGetSign.setEnabled(false);
+                    }
+                });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 

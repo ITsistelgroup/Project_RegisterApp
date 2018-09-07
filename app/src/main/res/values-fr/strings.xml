@@ -23,6 +23,7 @@
     <string name="Accept">Accept</string>
     <string name="Decline">Decline</string>
     <string name="Rellenar">Remplissez tous les champs obligatoires avant de continuer</string>
+    <string name="moreinfo">Lire plus d\'informations sur les politiques de l\'entreprise</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>
