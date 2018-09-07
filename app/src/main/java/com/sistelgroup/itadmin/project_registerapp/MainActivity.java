@@ -156,11 +156,11 @@ public class MainActivity extends AppCompatActivity {
         NumCIF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("") && NumCIF.getText().toString().length()==9){
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !NumCIF.getText().toString().matches("") && NumCIF.getText().toString().length()>=9){
                     new ConsultarEmpresa().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
                 }
 
-                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && (NumCIF.getText().toString().matches("") || NumCIF.getText().toString().length()!=9)){
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && (NumCIF.getText().toString().matches("") || NumCIF.getText().toString().length()<9)){
                     NameCompany.setEnabled(false);
                 }
             }

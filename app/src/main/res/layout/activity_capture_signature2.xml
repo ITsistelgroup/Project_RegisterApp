@@ -8,45 +8,6 @@
     android:layout_marginRight="3dp"
     android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout android:layout_height="0dp"
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:weightSum="3">
-
-        <Button android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/cancel"
-            android:layout_width="0dp"
-            android:textSize="25sp"
-            android:id="@+id/cancel" />
-
-        <Button android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/clear"
-            android:layout_width="0dp"
-            android:textSize="25sp"
-            android:id="@+id/clear" />
-
-        <Button android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/sign"
-            android:layout_width="0dp"
-            android:textSize="25sp"
-            android:id="@+id/getsign" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/img_company"
         android:layout_width="match_parent"
@@ -135,4 +96,48 @@
         android:background="#FFFFFF"
         android:paddingLeft="10dp"
         android:paddingTop="6dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="4"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/clear"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/getsign"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/sign"
+            android:textSize="25sp" />
+
+    </LinearLayout>
 </LinearLayout>
