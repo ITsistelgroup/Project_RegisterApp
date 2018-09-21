@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         DNI = findViewById(R.id.DNI);
         NameCompany = findViewById(R.id.NameCompany);
         NameCompany.setEnabled(false);
-        TitleCIF = findViewById(R.id.TitleCIF);
+        //TitleCIF = findViewById(R.id.TitleCIF);
 
         //tot en majúscules
         Visited.addTextChangedListener(new TextWatcher() {
@@ -153,6 +153,21 @@ public class MainActivity extends AppCompatActivity {
                 DNI.setSelection(DNI.getText().length());
             }
         });
+
+        DNI.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && !DNI.getText().toString().matches("") && DNI.getText().toString().length()>=9){
+                    new ConsultarEmpresaambDNI().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresaambDNI.php?DNI="/*+LletraCIF.getText().toString()*/+DNI.getText().toString());
+
+                }
+
+                //if(!hasFocus /*&& !LletraCIF.getText().toString().matches("")*/ && (NumCIF.getText().toString().matches("") || NumCIF.getText().toString().length()<9)){
+                //    NameCompany.setEnabled(false);
+                //}
+            }
+        });
+
         NumCIF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -309,6 +324,91 @@ public class MainActivity extends AppCompatActivity {
                 NameCompany.setText("");
                 NameCompany.setEnabled(true);
             }
+            /*
+            for(int i=0; i<entrades.length;i++){
+                list.add(new DropBoxManager.Entry(IDpersona, entrades[i]));
+                //liststrings.add((new Entry(IDpersona, entrades[i])).getIDJob());
+                Log.i("Element:", entrades[i]);
+            }
+
+            adapter = new EntryAdapter(HoursList.this,list);
+            Log.i("Adapter", "adapter creat");
+            EntryList.setAdapter(adapter);
+            Log.i("Adapter", "adapter assignat");
+            */
+
+        }
+    }
+
+    private class ConsultarNomambDNI extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                return downloadUrl(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "URL incorrecta";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if(result.indexOf("}")>0) {
+                entrades=result.split("\\}");
+                entrades = Arrays.copyOfRange(entrades, 0, entrades.length - 1);
+                Log.i("nvertstr", "[" + result + "]");
+
+
+                Name.setText(entrades[0].substring(entrades[0].indexOf(":") + 2, entrades[0].length() - 1));
+            } //else {
+              //  NameCompany.setText("");
+              //  NameCompany.setEnabled(true);
+            //}
+            /*
+            for(int i=0; i<entrades.length;i++){
+                list.add(new DropBoxManager.Entry(IDpersona, entrades[i]));
+                //liststrings.add((new Entry(IDpersona, entrades[i])).getIDJob());
+                Log.i("Element:", entrades[i]);
+            }
+
+            adapter = new EntryAdapter(HoursList.this,list);
+            Log.i("Adapter", "adapter creat");
+            EntryList.setAdapter(adapter);
+            Log.i("Adapter", "adapter assignat");
+            */
+
+        }
+    }
+
+    private class ConsultarEmpresaambDNI extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                return downloadUrl(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "URL incorrecta";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if(result.indexOf("}")>0) {
+                entrades=result.split("\\}");
+                entrades = Arrays.copyOfRange(entrades, 0, entrades.length - 1);
+                Log.i("nvertstr", "[" + result + "]");
+
+
+                NumCIF.setText(entrades[0].substring(entrades[0].indexOf(":") + 2, entrades[0].length() - 1));
+                new ConsultarNomambDNI().execute("http://192.168.4.13:8090/phpfiles/ConsultaNomambDNI.php?DNI="/*+LletraCIF.getText().toString()*/+DNI.getText().toString());
+                new ConsultarEmpresa().execute("http://192.168.4.13:8090/phpfiles/ConsultaEmpresa.php?CIF="/*+LletraCIF.getText().toString()*/+NumCIF.getText().toString());
+                //NumCIF.setEnabled(false);
+            } /*else {
+                NameCompany.setText("");
+                NameCompany.setEnabled(true);
+            }*/
             /*
             for(int i=0; i<entrades.length;i++){
                 list.add(new DropBoxManager.Entry(IDpersona, entrades[i]));
