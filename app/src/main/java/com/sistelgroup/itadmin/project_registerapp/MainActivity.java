@@ -34,6 +34,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.lang.Integer.parseInt;
 
@@ -70,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
         new ConsultarEmpleatsaVisitar().execute("http://192.168.4.13:8090/phpfiles/llistaPersonesaVisitar.php");
 
+        /*Timer myTimer = new Timer();
+
+        MyTimerTask myTask = new MyTimerTask();
+
+        myTimer.schedule(myTask, 5000);*/
 
 
         Resources res = getResources();
@@ -274,6 +281,13 @@ public class MainActivity extends AppCompatActivity {
         CompanyVisited.setAdapter(adapter);*/
     }
 
+    /*class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            //startActivity(new Intent(MainActivity.this, CompanySelection.class));
+            Toast.makeText(MainActivity.this, "El tiempo ha expirado", Toast.LENGTH_LONG).show();
+        }
+    }*/
 
     //TODO: control error WS (si no hi ha internet o falla ha de retornar-ho)
     private void register() {
