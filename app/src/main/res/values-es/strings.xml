@@ -24,6 +24,7 @@
     <string name="RGPDMessage1">Pacto de confidencialidad entre</string>
     <string name="Rellenar">Rellene todos los campos obligatorios antes de continuar</string>
     <string name="moreinfo">Leer más información sobre las políticas de empresa</string>
+    <string name="text_no_fotosmovil">Por cuestiones de confidencialidad, no se permite acceder a la planta de producción con dispositivos móviles o cámaras de fotos.\nEstos dispositivos deberán guardarse en las taquillas asignadas para tal fin.</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

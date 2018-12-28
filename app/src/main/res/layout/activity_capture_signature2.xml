@@ -3,7 +3,7 @@
     android:id="@+id/linearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="15"
+    android:weightSum="16"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
     android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
@@ -96,6 +96,40 @@
         android:background="#FFFFFF"
         android:paddingLeft="10dp"
         android:paddingTop="6dp"/>
+
+    <LinearLayout
+        android:id="@+id/No_fotosmovil"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/img_nofotos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/no_fotos" />
+        <ImageView
+            android:id="@+id/img_nomovil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/no_movil" />
+
+        <TextView
+            android:id="@+id/text_no_fotosmovil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:paddingStart="5dp"
+            android:paddingEnd="3dp"
+            android:layout_gravity="center"
+             />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"

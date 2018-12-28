@@ -24,6 +24,7 @@
     <string name="RGPDMessage1">a</string>
     <string name="Rellenar">Ompli tots els camps obligatoris abans de continuar</string>
     <string name="moreinfo">Leer más información sobre las políticas de empresa</string>
+    <string name="text_no_fotosmovil">Per qüestions de confidencialitat, no es permet accedir a la planta de producció amb dispositius mòbils o càmeres de fotos.\nAquests dispositius hauran de guardar-se a les taquilles assignades per aquest fi.</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>

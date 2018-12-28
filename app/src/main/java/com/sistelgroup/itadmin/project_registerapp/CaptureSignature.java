@@ -55,7 +55,7 @@ public class CaptureSignature extends AppCompatActivity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
-    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, moreinfo;
+    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, moreinfo,text_no_fotosmovil;
     CheckBox acceptRGPD;
     ImageView img_company;
     Intent myIntent;
@@ -80,6 +80,7 @@ public class CaptureSignature extends AppCompatActivity {
 
         mypath= new File(directory,current);
 
+        text_no_fotosmovil=findViewById(R.id.text_no_fotosmovil);
         CIF=findViewById(R.id.CIF);
         NomEmpresa=findViewById(R.id.NomEmpresa);
         NomPersona=findViewById(R.id.NomPersona);
@@ -97,6 +98,7 @@ public class CaptureSignature extends AppCompatActivity {
         QuiVisita.setText(getText(R.string.whosvisiting) + ": " + myIntent.getStringExtra("QuiVisita"));
         Motiu.setText(getText(R.string.motiu) + ": " + myIntent.getStringExtra("Motiu"));
         DNI.setText(getText(R.string.dni) + ": " + myIntent.getStringExtra("DNI"));
+        text_no_fotosmovil.setText(R.string.text_no_fotosmovil);
 
 
         switch (myIntent.getStringExtra("company")){
@@ -210,12 +212,17 @@ public class CaptureSignature extends AppCompatActivity {
     }
 
     public void info_RGPD() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CaptureSignature.this, R.style.ThemeOverlay_AppCompat_Dark);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CaptureSignature.this, R.style.AppTheme);
 
+        //ImageView image = new ImageView(this);
+        //image.setImageResource(R.mipmap.no_fotos);
         String text;
         if(myIntent.getStringExtra("company").equals("6TL Engineering")) {
             text = getResources().getString(R.string.RGPDMessage1) + " S.A.Sistel " + getResources().getString(R.string.RGPDMessage);
         } else {text = getResources().getString(R.string.RGPDMessage1) +" "+ myIntent.getStringExtra("company") +" "+ getResources().getString(R.string.RGPDMessage);}
+        //LayoutInflater inflater = LayoutInflater.from(CaptureSignature.this);
+        //final View view = inflater.inflate(R.layout.info_rgpd,null);
+        //alertDialogBuilder.setView(image);
         alertDialogBuilder.setTitle(R.string.RGPDTitle);
         alertDialogBuilder.setMessage(text);
         alertDialogBuilder.setPositiveButton(R.string.Accept,

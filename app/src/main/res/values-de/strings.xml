@@ -24,6 +24,7 @@
     <string name="Decline">Decline</string>
     <string name="Rellenar">Füllen Sie alle erforderlichen Felder aus, bevor Sie fortfahren</string>
     <string name="moreinfo">Lesen Sie mehr Informationen über Unternehmensrichtlinien</string>
+    <string name="text_no_fotosmovil">For reasons of confidentiality, it is not allowed to access the production plant with mobile devices or cameras.\nThese devices must be stored in the designated lockers.</string>
     <string-array name="List_CompanyVisited">
         <item>SistelGroup</item>
         <item>S.A. Sistel</item>
