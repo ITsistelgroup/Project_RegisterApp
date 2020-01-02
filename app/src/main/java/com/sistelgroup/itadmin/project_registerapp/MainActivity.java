@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     String[] entrades;
     ListView EntryList;
     TextView TitleCIF;
+    String Wifi_voucher="";
 
 
     TextView NameCompany;
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         NameCompany = findViewById(R.id.NameCompany);
         NameCompany.setEnabled(false);
         //TitleCIF = findViewById(R.id.TitleCIF);
+        new Consultar_WiFiVoucher().execute("http://192.168.4.13:8090/phpfiles/llistaWiFiVouchers.php");
 
         //tot en majúscules
         Visited.addTextChangedListener(new TextWatcher() {
@@ -258,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, R.string.Rellenar, Toast.LENGTH_LONG).show();
                 }
                 else{
+
                 Intent i = new Intent(MainActivity.this, CaptureSignature.class);
                 i.putExtra("CIF", NumCIF.getText().toString());
                 i.putExtra("NomEmpresa", NameCompany.getText().toString());
@@ -267,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("DNI", DNI.getText().toString());
                 i.putExtra("company", company);
                 i.putExtra("IDcompany", IDcompany);
+                i.putExtra("WiFi", Wifi_voucher);
                 startActivity(i);
                 }
             }
@@ -350,6 +354,34 @@ public class MainActivity extends AppCompatActivity {
             EntryList.setAdapter(adapter);
             Log.i("Adapter", "adapter assignat");
             */
+
+        }
+    }
+
+    private class Consultar_WiFiVoucher extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                return downloadUrl(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "URL incorrecta";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if(result.indexOf("}")>0) {
+                entrades=result.split("\\}");
+                entrades = Arrays.copyOfRange(entrades, 0, entrades.length - 1);
+                Log.i("nvertstr", "[" + result + "]");
+
+
+                Wifi_voucher=entrades[0].substring(entrades[0].indexOf(":") + 2, entrades[0].length() - 1);
+            } else {
+                Wifi_voucher="";
+            }
 
         }
     }

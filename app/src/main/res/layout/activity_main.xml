@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:hint="@string/dni"
             android:inputType="textCapCharacters"
-            android:maxLength="9"
+            android:maxLength="12"
             android:textSize="30sp" />
 
         <EditText

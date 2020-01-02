@@ -55,7 +55,7 @@ public class CaptureSignature extends AppCompatActivity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
-    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, moreinfo,text_no_fotosmovil;
+    TextView CIF, NomEmpresa, NomPersona, QuiVisita, Motiu, DNI, moreinfo,text_no_fotosmovil, Wifi;
     CheckBox acceptRGPD;
     ImageView img_company;
     Intent myIntent;
@@ -90,6 +90,7 @@ public class CaptureSignature extends AppCompatActivity {
         img_company=findViewById(R.id.img_company);
         acceptRGPD=findViewById(R.id.acceptRGPD);
         moreinfo=findViewById(R.id.moreinfo);
+        Wifi=findViewById(R.id.WiFi_voucher);
 
 
         CIF.setText("CIF: " + myIntent.getStringExtra("CIF"));
@@ -99,6 +100,7 @@ public class CaptureSignature extends AppCompatActivity {
         Motiu.setText(getText(R.string.motiu) + ": " + myIntent.getStringExtra("Motiu"));
         DNI.setText(getText(R.string.dni) + ": " + myIntent.getStringExtra("DNI"));
         text_no_fotosmovil.setText(R.string.text_no_fotosmovil);
+        Wifi.setText("WiFi voucher: " + myIntent.getStringExtra("WiFi"));
 
 
         switch (myIntent.getStringExtra("company")){
