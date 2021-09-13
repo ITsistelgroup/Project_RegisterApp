@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class CompanySelection extends AppCompatActivity {
 
-    ImageView logoDigi, logoSmartLift, logoSASistel, logo6TL, logoKfew;
+    ImageView logoDigi, logo6TL;
 
     //public String companySelected;
 
@@ -55,23 +55,6 @@ public class CompanySelection extends AppCompatActivity {
 
         logo6TL=findViewById(R.id.logo_6TL);
         logoDigi=findViewById(R.id.logo_Digi);
-        logoSASistel=findViewById(R.id.logo_sistel);
-        logoSmartLift=findViewById(R.id.logo_SmartLift);
-        logoKfew=findViewById(R.id.logo_Kfew);
-
-        logoSmartLift.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CompanySelected(3);
-            }
-        });
-
-        logoSASistel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CompanySelected(1);
-            }
-        });
 
         logoDigi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,12 +70,6 @@ public class CompanySelection extends AppCompatActivity {
             }
         });
 
-        logoKfew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CompanySelected(6);
-            }
-        });
     }
 
     private void CompanySelected(int i) {
