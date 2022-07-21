@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 CompanyVisited.setImageResource(R.mipmap.sasistel);
                 break;
             case "DigiProces S.A.":
-                CompanyVisited.setImageResource(R.mipmap.digi);
+                CompanyVisited.setImageResource(R.mipmap.digi2);
                 break;
             case "SmartLift S.L.":
                 CompanyVisited.setImageResource(R.mipmap.smartlift);
